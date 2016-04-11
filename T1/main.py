@@ -61,7 +61,7 @@ if __name__ == "__main__":
         lamb = 1.792
         tol = 1e-4
         print("Iterations: " + str(iterations))
-        print("Tolerancy: " + str(lamb))
+        print("Lambda: " + str(lamb))
         matrix3 = augmented(100)
         scaled = sor(matrix3, iterations, lamb, tol)
         print(scaled)
