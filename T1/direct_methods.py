@@ -14,7 +14,7 @@ def partial_pivoting(k, n, matrix):
     matrix[max_vpos] = aux
     return matrix
 
-def gaus_with_pivoting(matrix):
+def gauss_with_pivoting(matrix):
     n = len(matrix)
     for i in range(n-1):
         matrix = partial_pivoting(i, n, matrix)
@@ -32,16 +32,22 @@ def gaus_with_pivoting(matrix):
 
 def gaussian_elimination(matrix):
     n = len(matrix)
+    ops = 0
     for i in range(n-1):
         for j in range(i+1, n):
             aux = matrix[j][i] / matrix[i][i]
             matrix[j][i] = aux
+            ops += 1
             for k in range(i+1, n):
                 matrix[j][k] = matrix[j][k] - aux * matrix[i][k]
+                ops += 1
             matrix[j][n] -= aux * matrix[i][n]
+            ops += 1
     x = [0] * n
     for i in range(n-1, -1, -1):
         le_sum = sum(matrix[i][j] * x[j] for j in range(i+1, n))
         x[i] = (matrix[i][n] - le_sum) / matrix[i][i]
+        ops += 2
+    print("Floating point operations: {}".format(ops))
     return x
 

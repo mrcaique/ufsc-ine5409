@@ -37,31 +37,40 @@ def augmented(equations):
     return augmented
 
 if __name__ == "__main__":
-    matrix = augmented(100)
     print("------------------------------------------------")
-    print("\t DIRECT METHOD")
-    print("Gaussian elimination without partial pivoting")
+    print("A) DIRECT METHOD")
+    print("\t [Gaussian elimination without partial pivoting]")
+    answers = gaussian_elimination(augmented(100))
+    print("Exact values from the linear equations: \n")
+    print(answers)
     print("------------------------------------------------")
-    answers = gaussian_elimination(matrix)
-    print("Exact values from the linear equations: ")
-    print(answers)    
+    print("\n")
 
-    matrix2 = augmented(100)
     print("------------------------------------------------")
-    print("\t ITERATIVE METHOD")
-    print("Scarborough criterion ")
+    print("B) ITERATIVE METHOD")
+    print("1) Scarborough criterion ")
     print("------------------------------------------------")
-    if not(scarborough(matrix2)):
-        print("There no has diagonal dominance." + "\n")
-        print("Testing relaxing methods: ")
-        print("-------------------------------------------")
-        print("Successive over-relaxation ")
-        print("-------------------------------------------")
-        iterations = 1000
-        lamb = 1.792
+    if not(scarborough(augmented(100))):
+        print("There no has diagonal dominance.")
+        print("2-3) Testing relaxing methods")
+        print("4) Floating point operations")
+        print("\t [Successive over-relaxation]")
+
+        it= 1000
+        lamb = 1.878
         tol = 1e-4
-        print("Iterations: " + str(iterations))
-        print("Lambda: " + str(lamb))
-        matrix3 = augmented(100)
-        scaled = sor(matrix3, iterations, lamb, tol)
+        print("Iterations: {} Lambda: {} Tolerance: {}".format(it, lamb, tol))
+        m = augmented(100)
+        scaled = sor(m, it, lamb, tol)
+
         print(scaled)
+        print("\n")
+
+        print("-------------------------------------------")
+        print("5) Truncation error")
+        print("-------------------------------------------")
+        x = sor(m, 150, 1.878, 1e-4)
+        y = sor(m, 300, 1.878, 1e-4)
+        trunc = max(i - j for i, j in zip(x, y))
+        print("Biggest truncation error: {}".format(trunc))
+
