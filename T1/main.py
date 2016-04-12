@@ -3,38 +3,7 @@
 from direct_methods import gaussian_elimination
 from scarborough import scarborough
 from sor import sor
-
-def augmented(equations):
-    n = equations
-    rows = n
-    cols = n + 1
-    augmented = [[0] * int(cols) for i in range(rows)]
-    
-    i = 0
-    augmented[i][i] = 1
-    augmented[i][i+1] = 1
-    augmented[i][n] = 1.50
-    
-    for i in range(1, n//2):
-        augmented[i][i-1] = 1
-        augmented[i][i] = 3
-        augmented[i][i+1] = 1
-        augmented[i][i+n//2] = 1
-        augmented[i][n] = 1.00
-    
-    for i in range(n//2, n-1):
-        augmented[i][i-(n//2)] = 1
-        augmented[i][i-1] = 1
-        augmented[i][i] = 3
-        augmented[i][i+1] = 1
-        augmented[i][n] = 2.00
-    
-    i = n-1
-    augmented[i][i-1] = 1
-    augmented[i][i] = 1
-    augmented[i][n] = 3.00
-
-    return augmented
+from augmented import augmented
 
 if __name__ == "__main__":
     print("------------------------------------------------")

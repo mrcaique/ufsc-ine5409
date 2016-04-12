@@ -3,8 +3,25 @@
 from sys import float_info
 from copy import deepcopy
 
-def sor(mat, it, lamb, tol=float_info.epsilon):
-    n = len(mat)
+def sor(m, it, lamb, tol=float_info.epsilon):
+    """Successive over-relaxation (SOR) is a variant of the Gauss-Seidel
+    method for resolving linear system of equations to result a faster convergence.
+
+    Args:
+        m : matrix with the linear system of equations
+        it : maximum number of iterations
+        lamb : Relaxing factor
+        tol : tolerancy, a stopping criterion (to not execute several operations)
+            default: epsilon constant (2.220446049250313e-16)
+    
+    Returns:
+        x : Array with the values of the elements of linear equations
+
+    See:
+        direct_methods.py
+        https://en.wikipedia.org/wiki/Successive_over-relaxation
+    """
+    n = len(m)
     x = [0] * n
     ops = 0
     #sums = 0
