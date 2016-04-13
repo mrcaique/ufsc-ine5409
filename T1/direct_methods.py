@@ -75,15 +75,15 @@ def gaussian_elimination(m):
             m[j][i] = aux
             ops += 1
             for k in range(i+1, n):
-                m[j][k] = m[j][k] - aux * m[i][k]
-                ops += 1
+                m[j][k] -= aux * m[i][k]
+                ops += 2
             m[j][n] -= aux * m[i][n]
-            ops += 1
+            ops += 2
     x = [0] * n
     for i in range(n-1, -1, -1):
         le_sum = sum(m[i][j] * x[j] for j in range(i+1, n))
         x[i] = (m[i][n] - le_sum) / m[i][i]
-        ops += 2
+        ops += 2 + 2* len(range(i+1, n))
     print("Floating point operations: {}".format(ops))
     return x
 
