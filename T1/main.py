@@ -10,9 +10,9 @@ if __name__ == "__main__":
     print("------------------------------------------------")
     print("A) DIRECT METHOD")
     print("\t [Gaussian elimination without partial pivoting]")
-    answers = gaussian_elimination(augmented(n))
+    VE = gaussian_elimination(augmented(n))
     print("Exact values from the linear equations: \n")
-    print(answers)
+    print(VE)
     print("------------------------------------------------")
     print("\n")
 
@@ -27,20 +27,20 @@ if __name__ == "__main__":
         print("\t [Successive over-relaxation]")
 
         it= 1000
-        omega = 1.878
-        tol = 1e-2
+        omega = 1.879
+        tol = 1e-4
         print("Iterations: {} Omega: {} Tolerance: {}".format(it, omega, tol))
         m = augmented(100)
-        scaled = sor(m, it, omega, tol)
+        VA = sor(m, it, omega, tol)
 
-        print(scaled)
+        print(VA)
         print("\n")
 
         print("-------------------------------------------")
         print("5) Truncation error")
         print("-------------------------------------------")
-        x = sor(m, 500, 1.879, 1e-4)
-        y = sor(m, 500, 1.879, 1e-8)
-        trunc = abs(max(abs(i - j) for i, j in zip(x, y)))
+        #VA = sor(m, 500, 1.879, 1e-4)
+        #VE = sor(m, 1000, 1.879, 1e-4)
+        trunc = abs(max(abs((i - j) / j) for i, j in zip(VA, VE)))
         print("Biggest truncation error: {}".format(trunc))
 

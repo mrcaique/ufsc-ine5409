@@ -38,7 +38,7 @@ def sor(m, it, lamb, tol=float_info.epsilon):
         i = n - 1
         x[i] = (1 - lamb) * x[i] + lamb * (3.00 - x[i-1])
         ops += 5
-        if abs(max(init[i] - x[i] for i in range(len(x)))) < tol:
+        if max(abs((i - j) / j) for i, j in zip(init, x)) < tol:
             print("Maximum tolerance exceeded at iteration {}.".format(k+1))
             break
     print("Operations: {}".format(ops))

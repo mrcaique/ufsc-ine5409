@@ -26,27 +26,27 @@ def augmented(equations):
     augmented = [[0] * int(cols) for i in range(rows)]
 
     i = 0
-    augmented[i][i] = 1
-    augmented[i][i+1] = 1
+    augmented[i][i] = 1.0
+    augmented[i][i+1] = 1.0
     augmented[i][n] = 1.50
 
     for i in range(1, n//2):
-        augmented[i][i-1] = 1
-        augmented[i][i] = 3
-        augmented[i][i+1] = 1
-        augmented[i][i+n//2] = 1
+        augmented[i][i-1] = 1.0
+        augmented[i][i] = 3.0
+        augmented[i][i+1] = 1.0
+        augmented[i][i+n//2] = 1.0
         augmented[i][n] = 1.00
 
     for i in range(n//2, n-1):
-        augmented[i][i-(n//2)] = 1
-        augmented[i][i-1] = 1
-        augmented[i][i] = 3
-        augmented[i][i+1] = 1
+        augmented[i][i-(n//2)] = 1.0
+        augmented[i][i-1] = 1.0
+        augmented[i][i] = 3.0
+        augmented[i][i+1] = 1.0
         augmented[i][n] = 2.00
 
     i = n-1
-    augmented[i][i-1] = 1
-    augmented[i][i] = 1
+    augmented[i][i-1] = 1.0
+    augmented[i][i] = 1.0
     augmented[i][n] = 3.00
 
     return augmented
