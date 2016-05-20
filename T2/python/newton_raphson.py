@@ -15,4 +15,4 @@ def newton_raphson(func, xi, tol):
         diff = abs(diff1 - dif)
         old = dif
 
-    return x, m, k, diff
+    return [x, m, k, diff]
