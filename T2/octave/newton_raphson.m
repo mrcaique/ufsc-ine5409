@@ -13,8 +13,6 @@ function [x M k difDif] = newton_raphson(n, a, xI, tol)
         difDif = abs(difAnt - dif);
         difAnt = dif;
     end
-    printf("[ C ] Iterations in NR: "),
-    disp(k)
-    printf("[ E ] Stopping criterion from Newton-Raphson in: "),
+    printf("[ E ] Stopping criterion from Newton-Raphson in: \n"),
     disp(difDif);
 end
