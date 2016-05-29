@@ -27,16 +27,16 @@ def sor(m, it, lamb, tol=float_info.epsilon):
     for k in range(it):
         init = deepcopy(x)
         i = 0
-        x[i] = (1 - lamb) * x[i] + lamb * (1.50 - x[i+1])
+        x[i] = (1 - lamb) * x[i] + lamb * (m[i][n] - x[i+1])
         ops += 4
         for i in range(1, n//2):
-            x[i] = (1 - lamb) * x[i] + lamb * (1.00 - x[i-1] - x[i+1] - x[i+(n//2)]) / 3
+            x[i] = (1 - lamb) * x[i] + lamb * (m[i][n] - x[i-1] - x[i+1] - x[i+(n//2)]) / m[i][i]
             ops += 8
         for i in range(n//2, n-1):
-            x[i] = (1 - lamb) * x[i] + lamb * (2.00 - x[i-(n//2)] - x[i-1] - x[i+1]) / 3
+            x[i] = (1 - lamb) * x[i] + lamb * (m[i][n] - x[i-(n//2)] - x[i-1] - x[i+1]) / m[i][i]
             ops += 8
         i = n - 1
-        x[i] = (1 - lamb) * x[i] + lamb * (3.00 - x[i-1])
+        x[i] = (1 - lamb) * x[i] + lamb * (m[i][n] - x[i-1])
         ops += 5
         if max(abs((i - j) / j) for i, j in zip(init, x)) < tol:
             print("Maximum tolerance exceeded at iteration {}.".format(k+1))
