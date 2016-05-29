@@ -7,12 +7,12 @@ P6(x)= (1+0i)x^6 - (5 + i)x^5 + (9.99 + 5i)x^4 - (9.97 + 9.99i)x^3 + (4.97 + 9.9
 
 Pede-se:
 
-a). O seu valor inicial, otimizado por um algoritmo de busca com pelo menos uma cota limite;
-b). Faça experimentos numéricos com o valor limite mínimo dos restos Rlim considerados 'numericamente pequenos' na contagem de restos nulos para computo da multiplicidade M. Imprima, em um 'texto-string', os valores testados e o valor final otimizado, que gera o menor número de iterações total para obter todas as raízes;
-c). Número de iterações do Newton-Raphson na primeira chamada com cada polinômio de grau reduzido (resultante das divisões);
-d). Número de iterações do Newton-Raphson na segunda chamada de refinamento no polinômio original  (sem arredondamentos nos coeficientes);
-e). Critério de parada atingido após aplicar os dois processos de Newton-Raphson;
-f). Numero total de iterações efetuadas;
-g). as raízes refinadas convergidas e suas multiplicidades M;
-h). as raízes da função roots() do próprio octave e do WolframAlpha para comparar os seus resultados;
-i). imprima quais resultados tem maior exatidão e o porquê.
+1. O seu valor inicial, otimizado por um algoritmo de busca com pelo menos uma cota limite;
+2. Faça experimentos numéricos com o valor limite mínimo dos restos Rlim considerados 'numericamente pequenos' na contagem de restos nulos para computo da multiplicidade M. Imprima, em um 'texto-string', os valores testados e o valor final otimizado, que gera o menor número de iterações total para obter todas as raízes;
+3. Número de iterações do Newton-Raphson na primeira chamada com cada polinômio de grau reduzido (resultante das divisões);
+4. Número de iterações do Newton-Raphson na segunda chamada de refinamento no polinômio original  (sem arredondamentos nos coeficientes);
+5. Critério de parada atingido após aplicar os dois processos de Newton-Raphson;
+6. Número total de iterações efetuadas;
+7. As raízes refinadas convergidas e suas multiplicidades M;
+8. As raízes da função `roots()` do próprio Octave e do Wolfram Alpha para comparar os seus resultados;
+9. Imprima quais resultados tem maior exatidão e o porquê.
