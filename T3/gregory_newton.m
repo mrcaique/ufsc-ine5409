@@ -1,11 +1,13 @@
 %{
     DIVIDED DIFFERENCES
-    Given the respective tabulated values:
+    Given the respective tabulated values in the table T1:
     
-    i  =  [1  2  ... n]
-    xi = [x1 x2 ... xn]
-    yi = [y1 y2 ... yn] = f(xi)
-    
+    Table T1 = {
+        i  =  [1  2  ... n]
+        xi = [x1 x2 ... xn]
+        yi = [y1 y2 ... yn] = f(xi)
+    }
+
     The divided difference delta^(k)y, in foward ward, is defined as:
 
     delta^(1)yi = (y[i+1] - y[i]) / (x[i+1] - x[i])
@@ -22,9 +24,9 @@
 
     Args:
         points : points between a interval [a, b] ("Line of the points in x")
-        x : x points in the tabulated table (with correspondents y)
-        y : y points in the tabulated table (with correspondents x)
-        n : number of points ("number of the columns in the table")
+        x : x points in the tabulated table T1 (with correspondents y)
+        y : y points in the tabulated table T1 (with correspondents x)
+        n : number of points ("number of the columns in the table T1")
 
     Return:
         yPn : Newton polynomial
