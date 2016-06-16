@@ -4,6 +4,9 @@ clear
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	Chapter 5, exercise 2	    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%
+%2b%
+%%%%
 x = [ 0  1 2 3];
 y = [-3 -2 4 0];
 n = length(x) - 1;
@@ -15,6 +18,49 @@ end
 a=[];
 b=[]; 
 [a  b  c  d] = splines(n,x,y,h);
+printf('\n[ 2b ] Splines com extremos quadráticos: ')
+printf('\n[ 2b ] a ='), disp(a)
+printf('[ 2b ] b ='), disp(b)
+printf('[ 2b ] c ='), disp(c)
+printf('[ 2b ] d ='), disp(d)
+
+%%%%
+%2c%
+%%%%
+point = 1.3;
+with = 0; % Spline with the 'point = 1.3'
+for i = 1 : n
+    if (point > x(i))
+        point = i;
+    end
+end
+
+printf('\n[ 2c ] Dado xp = 1.3, qual spline representa?')
+printf('\n[ 2c ] Resp.: '), disp(with)
+
+%%%%
+%2d%
+%%%%
+point = 1.3;
+with = 0;
+for i = 1 : n
+    if (point > y(i))
+        point = i;
+    end
+end
+
+printf('\n[ 2d ] Dado x = 1.3')
+printf('\n[ 2d ] O valor de y em x é: '), disp(point);
+
+%%%%
+%2e%
+%%%%
+%plot(a, "g;'splines no ponto a';")
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Chapter 5, exercise 3       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	Chapter 6, exercise 1	    %
@@ -68,8 +114,8 @@ while (max_mac_error > (sqrt(10) * 1e-2))
 end
 
 printf('\n[ 1b ] Maclaurin:')
-printf('\n[ 1a ] Grau n ='), disp(n)
-printf('[ 1a ] Erro máximo: '), disp(max_mac_error)
+printf('\n[ 1b ] Grau n ='), disp(n)
+printf('[ 1b ] Erro máximo: '), disp(max_mac_error)
 printf('[ 1b ] Coeficientes da série de Maclaurin: ')
 mac(1:n+1)
 
@@ -121,7 +167,8 @@ printf('[ 1e ] Erro máximo = '), disp(max_pade_error)
 %%%%
 %1f%
 %%%%
-%plot(points, mac_error, "g;Erro = | T3(x) - sen(x) |, série Tchebyschev n = 3;",
-%    points, tcbv_error, "k;Erro = | abs(T5(5) - sen(x) |, série Tchebyschev n = 5;",
-%    points, pade_error, "m;Erro = | abs(R32(x) - sen(x) |, Racional de Padé m = 5;")
+%plot(points, mac_error, "g;'Erro = | T3(x) - sen(x) |, série Tchebyschev n = 3';",
+%    points, tcbv_error, "k;'Erro = | abs(T5(5) - sen(x) |, série Tchebyschev n = 5';",
+%    points, pade_error, "m;'Erro = | abs(R32(x) - sen(x) |, Racional de Padé m = 5';")
 %grid
+
