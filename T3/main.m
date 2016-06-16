@@ -60,7 +60,39 @@ printf('\n[ 2d ] O valor de y em x é: '), disp(point);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Chapter 5, exercise 3       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AB segment
+n = 4;
+points = 100;
+h = 1 / points;
 
+x(1) = 0;   y(1) = 0;
+x(2) = 1;   y(2) = 1;
+x(3) = 1.9; y(3) = 1;
+x(4) = 2;   y(4) = 1;
+[xx yy xp yp] = bezier(x, y, points, h);
+
+%plot(xx, yy, '-k', "linewidth", 3,
+%    xp, yp, '*', "linewidth", 5)
+
+% BC segment
+x(1) = 2;       y(1) = 1;
+x(2) = 3;       y(2) = 1 + 1 * tan(-15 * pi / 180);
+x(3) = 8 - 1;   y(3) = 0.2 - 1 * tan(-8 * pi / 180);
+x(4) = 8;       y(4) = 0.2;
+[xx yy xp yp] = bezier(x, y, points, h);
+
+%plot(xx, yy, '-k', "linewidth", 3,
+%    xp, yp, '*', "linewidth", 5)
+
+% CD segment
+x(1) = 8;           y(1) = 0.2; 
+x(2) = 8 + 0.5;     y(2) = 0.2 + 0.5 * tan(-8 * pi/180);
+x(3) = 10 - 0.5;    y(3) = 0.5 * tan(-05 * pi/180);
+x(4) = 10;          y(4) = 0;
+[xx yy xp yp] = bezier(x, y, points, h);
+
+%plot(xx, yy, '-k', "linewidth", 3,
+%    xp, yp, '*', "linewidth", 5)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	Chapter 6, exercise 1	    %
@@ -171,4 +203,3 @@ printf('[ 1e ] Erro máximo = '), disp(max_pade_error)
 %    points, tcbv_error, "k;'Erro = | abs(T5(5) - sen(x) |, série Tchebyschev n = 5';",
 %    points, pade_error, "m;'Erro = | abs(R32(x) - sen(x) |, Racional de Padé m = 5';")
 %grid
-
