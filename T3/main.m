@@ -170,6 +170,58 @@ printf('\n[ 4d ] plot\n')
 %grid
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Chapter 5, exercise 5       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+clear
+a = 0;
+b = 1;
+n = 2;
+h = (b - a) / n;
+x = a : h : b;
+y = exp(x);
+
+npoints = 20 * n;
+hpoints = (x(n + 1) - x(1)) / npoints;
+xpoints = a : hpoints : b;
+exct = exp(xpoints);
+
+% Canonical
+eqs = n + 1;
+for i = 1 : eqs 
+      m(i, eqs) = 1; 
+      for j = eqs - 1 : -1 : 1 
+            m(i, j) = m(i, j + 1) * x(i); 
+      end
+      m(i, eqs + 1) = y(i);
+end
+pol = gauss(eqs, m); % Coeficients
+
+ca_yaprx = briot_ruffini(n, pol, xpoints);
+ca_max_error = max(abs(ca_yaprx .- exct));
+
+% Gregory-Newton and Lagrange
+for i = 1 : npoints + 1
+    la_yaprx(i) = lagrange(xpoints(i), n, x, y);
+    ng_yaprx(i) = gregory_newton(xpoints(i), n, x, y);
+end
+
+la_max_error = max(abs(la_yaprx .- exct));
+ng_max_error = max(abs(ng_yaprx .- exct));
+
+printf(strcat('\n[ 5b ] Erro máximo do interpolador de f(x)=cos(x) no ',
+    ' polinômio interpolador na base canônica:')),
+disp(ca_max_error);
+
+printf(strcat('\n[ 5c ] Erro máximo do interpolador de f(x)=cos(x) na ',
+    ' base dos polinômios de Lagrange:')),
+disp(la_max_error);
+
+printf(strcat('\n[ 5d ] Erro máximo do interpolador de f(x)=cos(x) na ',
+    ' interpolação de Gregory-Newton com diferenças divididas ascendentes:')),
+disp(ng_max_error);
+%printf('\n[ 5c ] Coeficientes de Lagrange: '), disp(transpose(yaprx));
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Chapter 5, exercise 6       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%
