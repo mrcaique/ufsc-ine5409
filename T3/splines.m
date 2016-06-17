@@ -17,7 +17,6 @@ function [a b c d] = splines(m,x,y,h)
     d(m) = 0;
     b(m) = 6 * ((y(m + 1) - y(m)) / h(m) - (y(m) - y(m - 1)) / h(m - 1));
 
-    %Sistemas de eqs. tridiagonal com eqs. de i=2 a m 
     for i = 3 : m
         aux = t(i) / r(i-1);
         t(i) = 0;
@@ -34,12 +33,10 @@ function [a b c d] = splines(m,x,y,h)
     S(1) = S(2);
     S(m+1) = S(m); 
     S
-    % Calcula-se cada conjunto de coeficientes a, b, c, d
-    % dos polinimois de 3o. grau 
     a = [];
     b = [];
     c = [];
-    d = []; %zera memoria 
+    d = [];
     for i=1 : m 
         a(i) = (S(i+1) - S(i)) / (6 * h(i)); 
         b(i) = S(i) / 2; 
