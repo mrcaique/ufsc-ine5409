@@ -22,13 +22,15 @@
 	N(x) = y1 + dy1*(x - x1) + d^(2)y1*(x - x1)*(x - x2) + ...
         + d^(n)y1*(x - x1)*...*(x - xn)
 
+    Obs.: d = delta
+
     Args:
         points : points between a interval [a, b] ("Line of the points in x")
         x : x points in the tabulated table T1 (with correspondents y)
         y : y points in the tabulated table T1 (with correspondents x)
         n : number of points ("number of the columns in the table T1")
 
-    Return:
+    Returns:
         yPn : Newton polynomial
 
     See:
