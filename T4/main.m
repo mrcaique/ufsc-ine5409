@@ -178,13 +178,13 @@ printf('\n[ 6e ] Integral of the polynomial Pn(x): ');
 disp(area);
 
 %%%%
-%6e%
+%6f%
 %%%%
 x = a : 0.01 : b;
-y = erf(x);
+y = 2 / sqrt(pi) .* exp(-x.**2);
 
-yp = polyval(integral, x);
-printf('\n[ 6f ] Plot!\n')
+yp = polyval(coef, x);
+printf('\n[ 6f ] plot!\n');
 %plot(x, y, '-r;Exact function erf(x);', 'linewidth', 10,
 %    x, yp, '-k;Approx. function Pn(x);', 'linewidth', 3,
 %    xm, ym, 'x;Points used by Gauss Legendre method;', 'linewidth', 5);
