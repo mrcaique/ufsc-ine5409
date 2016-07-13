@@ -185,6 +185,6 @@ y = 2 / sqrt(pi) .* exp(-x.**2);
 
 yp = polyval(coef, x);
 printf('\n[ 6f ] plot!\n');
-%plot(x, y, '-r;Exact function erf(x);', 'linewidth', 10,
+%plot(x, y, '-r;Integrand function 2/sqrt(pi)*-exp(-x^2);', 'linewidth', 10,
 %    x, yp, '-k;Approx. function Pn(x);', 'linewidth', 3,
 %    xm, ym, 'x;Points used by Gauss Legendre method;', 'linewidth', 5);
