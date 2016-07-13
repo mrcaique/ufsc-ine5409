@@ -18,9 +18,14 @@
         coef : The coeficients of the polynomial Pn(x)
         x : x points used to approximate Pn(x)
         y : y points used to approximate Pn(x)
+        
+    Obs.:
+        'polyfit' returns the coefficients of a polynomial Pn(x) of degree (m-1)
+        that minimizes the error of the fit to the points [x, y]
 
     See:
         https://en.wikipedia.org/wiki/Gaussian_quadrature
+        https://www.gnu.org/software/octave/doc/v4.0.0/Polynomial-Interpolation.html
 %}
 function [gm, coef, x, y] = gauss_legendre(m, a, b, func)
     C = cgl();
@@ -28,23 +33,13 @@ function [gm, coef, x, y] = gauss_legendre(m, a, b, func)
     tsum = 0;
     for k = 1 : m
         x(k) = 0.5 * (b - a) * t(m, k) + 0.5 * (b + a);
+        % y = f(x) = -x ^ 2
+        % f(x) is the integrand function from the erf function
         y(k) = func(-x(k) .^ 2);
         tsum = tsum + C(m,k) * y(k);
     end
     gm = 0.5 * (b - a) * tsum;
+
     y = y * (2 / sqrt(pi));
-    
-    % Searching by the coeficients
-    % Using canonical matrix
-    % n = m - 1; % polynomial grade
-    % eqs = n + 1; % number of elements 
-    % for i = 1 : eqs 
-    %       m(i, eqs) = 1; 
-    %       for j = eqs - 1 : -1 : 1 
-    %             m(i, j) = m(i, j + 1) * x(i); 
-    %       end
-    %       m(i, eqs + 1) = y(i);
-    % end
-    % coef = gauss(eqs, m); % Returns the coeficients
     coef = polyfit(x, y, m-1);
 end
