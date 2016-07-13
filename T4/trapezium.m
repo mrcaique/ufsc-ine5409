@@ -22,6 +22,8 @@
 function Tn = trapezium(n, a, b, func)
     h = (b - a) / n;
     x = a : h : b;
+    % y = f(x) = -x ^ 2
+    % f(x) is the integrand function from the erf function
     y = func(-x .^ 2);
 
     tsum = 0;
