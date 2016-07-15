@@ -200,24 +200,52 @@ printf('\n-------------------------------------------------------------\n');
 %%%%
 %1a%
 %%%%
-% clear
-% clc
-% format long
+clear
+clc
+format long
 
-% m = 6; % Number of points
-% t = [ 0.2  0.4  0.6  0.8  0.9  1.0  ];
-% v = [ 0.04 0.14 0.30 0.45 0.61 0.69 ];
+m = 6; % Number of points
+t = [ 0.2  0.4  0.6  0.8  0.9  1.0  ];
+v = [ 0.04 0.14 0.30 0.45 0.61 0.69 ];
 
-% initial_x = [0.5 0.5];
-% sol = nl_newton_raphson(initial_x);
+initial_x = [0.5 0.5];
+sol = nl_newton_raphson(initial_x);
 
-% a = sol(1);
-% b = sol(2);
+a = sol(1);
+b = sol(2);
 
-% printf('\n[ 1a ] a = ');
-% disp(a);
-% printf('[ 1b ] b = ');
-% disp(b);
+printf('\n[ 1a ] a = ');
+disp(a);
+printf('[ 1a ] b = ');
+disp(b);
+
+%%%%
+%1b%
+%%%%
+deviation = abs(log(a + b .* t.^2) .- v);
+printf('\n[ 1b ] Local deviation: ');
+disp(transpose(deviation));
+
+%%%%
+%1c%
+%%%%
+points = 200;
+h = (t(m) - t(1)) / points;
+xpoints = t(1) : h : t(m);
+adfunc = log(a + b .* xpoints.^2);
+
+n = m - 1; 
+interfunc = gregory_newton(xpoints, n, t, v);
+
+printf('\n[ 1c ] Plot!\n');
+% plot(
+%     t, v, '*', 'markersize', 20,
+%     xpoints, adfunc, '-k;Adjusted function V(t)=ln(a+b*T^2);', 'linewidth', 5,
+%     xpoints, interfunc, '--r;Polynomial interpolation Pn(x);', 'linewidth', 5
+% );
+%{
+    A melhor aproximação para os m pontos foi o ajuste.
+%}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Chapter 7, exercise 2       %
