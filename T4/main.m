@@ -211,8 +211,8 @@ printf('\n-------------------------------------------------------------\n');
 % initial_x = [0.5 0.5];
 % sol = nl_newton_raphson(initial_x);
 
-% a = g1(sol(1));
-% b = g2(sol(2));
+% a = sol(1);
+% b = sol(2);
 
 % printf('\n[ 1a ] a = ');
 % disp(a);
