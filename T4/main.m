@@ -272,7 +272,7 @@ ycm   = [1.04 1.18 1.29 1.35 1.28 1.21 1.06]; % y
 h = (xtemp(m) - xtemp(1)) / m; % interval
 xpoints = xtemp(1) : h : xtemp(m);
 
-nf = 2;
+nf = 1;
 xsolf = pol_adjust(nf, m, xtemp, ycm);
 ysolf = horner(nf, xsolf, xpoints);
 
@@ -358,6 +358,6 @@ disp(b);
 tpoints = t(1) : 0.01 : t(m);
 adjust = a .* tpoints .+ b .* cos(tpoints);
 vk = a .* t .+ b .* cos(t);
-deviation = abs(vk .- vk);
+deviation = abs(v .- vk);
 printf('\n[ 4b ] Plot!\n');
 %bar(t, deviation, "b*;Local deviations;"); 
