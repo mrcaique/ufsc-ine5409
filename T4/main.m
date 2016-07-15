@@ -297,8 +297,8 @@ m = 7;
 xtemp = [13.9 37.0 67.8 79.0 85.5 93.1 99.2]; % x
 ycm   = [1.04 1.18 1.29 1.35 1.28 1.21 1.06]; % y
 
-h = (xtemp(m) - xtemp(1)) / m; % interval
-xpoints = xtemp(1) : h : xtemp(m);
+%h = (xtemp(m) - xtemp(1)) / m; % interval
+xpoints = xtemp(1) : 0.01 : xtemp(m);
 
 nf = 1;
 xsolf = pol_adjust(nf, m, xtemp, ycm);
@@ -308,29 +308,29 @@ ns = 2;
 xsols = pol_adjust(ns, m, xtemp, ycm);
 ysols = horner(ns, xsols, xpoints);
 
-printf('\n[ 3a ] y points in the adjust Pn(x), where n = 1');
-disp(transpose(ysolf));
-printf('\n[ 3a ] y points in the adjust Pn(x), where n = 2');
-disp(transpose(ysols));
+printf('\n[ 3a ] y points in the adjust Pn(x), where n = 1:');
+disp(transpose(xsolf));
+printf('\n[ 3a ] y points in the adjust Pn(x), where n = 2:');
+disp(transpose(xsols));
 
 %%%%
 %3b%
 %%%%
 n = m - 1;
 inter = gregory_newton(xpoints, n, xtemp, ycm);
-printf('\n[ 3b ] y points in the interpolating polinomial: ');
-disp(transpose(inter));
+%printf('\n[ 3b ] y points in the interpolating polinomial: ');
+%disp(transpose(inter));
 
 %%%%
 %3c%
 %%%%
 printf('\n[ 3c ] Plot!\n');
-% plot(
-%     xtemp, ycm, '*', 'markersize', 20,
-%     xpoints, ysolf, "-r;Adjust with a Pn(x), where n = 1;", 'linewidth', 5,
-%     xpoints, ysols, "-k;Adjust with a Pn(x), where n = 2;", 'linewidth', 5,
-%     xpoints, inter, "-b;Polynomial Interpolation Pn(x);", 'linewidth', 5
-% );
+%plot(
+%    xtemp, ycm, '*', 'markersize', 20,
+%    xpoints, ysolf, "-r;Adjust with a Pn(x), where n = 1;", 'linewidth', 5,
+%    xpoints, ysols, "-k;Adjust with a Pn(x), where n = 2;", 'linewidth', 5,
+%    xpoints, inter, "-b;Polynomial Interpolation Pn(x);", 'linewidth', 5
+%);
 
 %%%%
 %3d%
