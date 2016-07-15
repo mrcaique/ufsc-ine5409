@@ -13,6 +13,9 @@ b = 1;
 
 exct = erf(x);
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Chapter 8, exercise 6       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%
 %6a%
 %%%%
@@ -188,3 +191,173 @@ printf('\n[ 6f ] plot!\n');
 %plot(x, y, '-r;Integrand function 2/sqrt(pi)*-exp(-x^2);', 'linewidth', 10,
 %    x, yp, '-k;Approx. function Pn(x);', 'linewidth', 3,
 %    xm, ym, 'x;Points used by Gauss Legendre method;', 'linewidth', 5);
+
+printf('\n-------------------------------------------------------------\n');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Chapter 7, exercise 1       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%
+%1a%
+%%%%
+% clear
+% clc
+% format long
+
+% m = 6; % Number of points
+% t = [ 0.2  0.4  0.6  0.8  0.9  1.0  ];
+% v = [ 0.04 0.14 0.30 0.45 0.61 0.69 ];
+
+% initial_x = [0.5 0.5];
+% sol = nl_newton_raphson(initial_x);
+
+% a = g1(sol(1));
+% b = g2(sol(2));
+
+% printf('\n[ 1a ] a = ');
+% disp(a);
+% printf('[ 1b ] b = ');
+% disp(b);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Chapter 7, exercise 2       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+printf('\n[ 2 ] Comments!\n')
+%%%%
+%2a%
+%%%%
+%{
+    O ajuste polinomial é utilizado quando se quer notar um padrão entre uma
+    dada sequência de pontos estudados e concluídos. O ajuste constitui de uma
+    função aproximada aos pontos em questão, de tal que há um erro inerente
+    (desvio local) entre um ponto estudado e o local onde a função estimada
+    passa. Interpolação é utilizado quando se quer o polinômio que passa sobre
+    todos os pontos.
+%}
+%%%%
+%2b%
+%%%%
+%{
+    O polinômio encontrado na interpolação passa por todos os pontos tabelados.
+%}
+%%%%
+%2c%
+%%%%
+%{
+    O polinômio encontrado no ajuste passa o mais próximo possível dos pontos
+    tabelados com o menor desvio possível.
+%}
+%%%%
+%2d%
+%%%%
+%{
+    Ajustando um polinômio interpolador a n + 1 pontos tabelados, o desvio chega
+    tão próximo a zero que iguala ao próprio polinômio interpolador.
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Chapter 7, exercise 3       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%
+%3a%
+%%%%
+clear
+clc
+format long
+
+m = 7;
+xtemp = [13.9 37.0 67.8 79.0 85.5 93.1 99.2]; % x
+ycm   = [1.04 1.18 1.29 1.35 1.28 1.21 1.06]; % y
+
+h = (xtemp(m) - xtemp(1)) / m; % interval
+xpoints = xtemp(1) : h : xtemp(m);
+
+nf = 2;
+xsolf = pol_adjust(nf, m, xtemp, ycm);
+ysolf = horner(nf, xsolf, xpoints);
+
+ns = 2;
+xsols = pol_adjust(ns, m, xtemp, ycm);
+ysols = horner(ns, xsols, xpoints);
+
+printf('\n[ 3a ] y points in the adjust Pn(x), where n = 1');
+disp(transpose(ysolf));
+printf('\n[ 3a ] y points in the adjust Pn(x), where n = 2');
+disp(transpose(ysols));
+
+%%%%
+%3b%
+%%%%
+n = m - 1;
+inter = gregory_newton(xpoints, n, xtemp, ycm);
+printf('\n[ 3b ] y points in the interpolating polinomial: ');
+disp(transpose(inter));
+
+%%%%
+%3c%
+%%%%
+printf('\n[ 3c ] Plot!\n');
+% plot(
+%     xtemp, ycm, '*', 'markersize', 20,
+%     xpoints, ysolf, "-r;Adjust with a Pn(x), where n = 1;", 'linewidth', 5,
+%     xpoints, ysols, "-k;Adjust with a Pn(x), where n = 2;", 'linewidth', 5,
+%     xpoints, inter, "-b;Polynomial Interpolation Pn(x);", 'linewidth', 5
+% );
+
+%%%%
+%3d%
+%%%%
+printf('\n[ 3d ] Comments!\n');
+%{
+    Vale mais ajustar usando o ajuste polinomial de grau 2, porque é onde mais
+    se adequa aos padrões dos pontos. O ajuste polinomial de grau 1 não captura
+    a pequena curva dos pontos experimentais, enquanto a interpolação se torna
+    visivelmente inviável (sem padrão, apenas passa por cima dos pontos).
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Chapter 7, exercise 4       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%
+%4a%
+%%%%
+clear
+clc
+format long
+
+m = 4;
+t = [0.00 0.39 0.78 1.18];
+v = [0.99 0.92 0.71 0.38];
+
+a = [0 0;
+    0 0];
+
+b = [0 0];
+
+for k = 1 : m
+    a(1,1) = a(1,1) + t(k)^2;
+    a(1,2) = a(1,2) + t(k) * cos(t(k));
+    a(2, 2) = a(2, 2) + (cos(t(k)))^2;
+    b(1) = b(1) + t(k) * v(k);
+    b(2) = b(2) + v(k) * cos(t(k));
+end
+a(2,1) = a(1,2);
+
+sol = gauss(2, [a transpose(b)]);
+a = sol(1);
+b = sol(2);
+
+printf('\n[ 4a ] a = ');
+disp(a);
+printf('[ 4a ] b = ');
+disp(b);
+
+%%%%
+%4b%
+%%%%
+tpoints = t(1) : 0.01 : t(m);
+adjust = a .* tpoints .+ b .* cos(tpoints);
+vk = a .* t .+ b .* cos(t);
+deviation = abs(vk .- vk);
+printf('\n[ 4b ] Plot!\n');
+%bar(t, deviation, "b*;Local deviations;"); 
